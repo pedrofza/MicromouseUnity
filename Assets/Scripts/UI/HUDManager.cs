@@ -10,6 +10,7 @@ public class HUDManager : MonoBehaviour
     private RobotSerialBus bus;
     [SerializeField] private TMP_InputField comPortField;
     [SerializeField] private TMP_InputField baudRateField;
+    [SerializeField] private UnityEngine.UI.Button connectButton;
 
     [Inject]
     void Construct(RobotSerialBus serialBus)
@@ -25,12 +26,12 @@ public class HUDManager : MonoBehaviour
             int br = Convert.ToInt32(baudRateField.text);
             bus.Configure(comPortField.text, br);
             bus.Connect();
-            Debug.Log("Connected");
+            connectButton.GetComponentInChildren<TextMeshProUGUI>().text = "Disconnect";
         }
         else
         {
             bus.Disconnect();
-            Debug.Log("Disconnected");
+            connectButton.GetComponentInChildren<TextMeshProUGUI>().text = "Connect";
         }
     }
 }

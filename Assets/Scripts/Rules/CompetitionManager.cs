@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System;
 using Zenject;
+using UnityEngine.SceneManagement;
 
 public class MyTimer
 {
@@ -98,8 +99,7 @@ public class CompetitionManager : MonoBehaviour
 {
     [SerializeField] private Vector3 spawnPosition;
     [SerializeField] private MazePhysicalSpecification mazeSpecs;
-    [SerializeField] private TextAsset mazeDescriptionFile;
-    
+
     [SerializeField] private TextMeshProUGUI globalTimerField;
     [SerializeField] private TextMeshProUGUI lapTimerField;
     [SerializeField] private PhysicMaterial mazeMaterial;
@@ -111,8 +111,18 @@ public class CompetitionManager : MonoBehaviour
 
     private void Awake()
     {
-        maze = new Maze(mazeDescriptionFile, mazeSpecs, mazeMaterial);
         compTimer = new CompetitionTimer();
+    }
+
+    private void OnEnable()
+    {
+        if (!PopulateMazeSelection.selectedAsset)
+        {
+            Debug.Log("Asset was null");
+            return;
+        }
+
+        maze = new Maze(PopulateMazeSelection.selectedAsset, mazeSpecs, mazeMaterial);
         maze.Build();
         robotPrefab.transform.position = spawnPosition + maze.StartingPosition();
     }
@@ -126,5 +136,10 @@ public class CompetitionManager : MonoBehaviour
     {
         globalTimerField.SetText(TimeSpan.FromSeconds(compTimer.GlobalTime()).ToString(@"mm\:ss\:fff"));
         lapTimerField.SetText(TimeSpan.FromSeconds(compTimer.LapTime()).ToString(@"mm\:ss\:fff"));
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 }

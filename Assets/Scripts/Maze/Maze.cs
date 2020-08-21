@@ -43,6 +43,7 @@ public class Maze
         posts.transform.parent = maze.transform;
         walls.transform.parent = maze.transform;
         List<GameObject> goals = new List<GameObject>();
+
         float yPos = 0.0f;
         for (int i = 0; i < lines.Length; i++)
         {
@@ -103,10 +104,17 @@ public class Maze
         float yS = yl * specs.CellSize;
 
         floor.transform.localScale = new Vector3(xl * specs.CellSize + specs.WallThickness, specs.WallHeight, yl * specs.CellSize + specs.WallThickness);
-        floor.transform.Translate(xS/2, -specs.WallHeight, -yS/2);
+        floor.transform.Translate(0, -specs.WallHeight, 0);
         floor.transform.parent = theMaze.transform;
-
+        posts.transform.Translate(-xS/2, 0.0f, yS/2);
+        walls.transform.Translate(-xS/2, 0.0f, yS/2);
+        triggers.transform.Translate(-xS/2, 0.0f, yS/2);
         return maze;
+    }
+
+    public void Unbuild()
+    {
+        GameObject.Destroy(theMaze);
     }
 
     private GameObject InstantiateWallPrimitive()
