@@ -10,6 +10,7 @@ public class IncrementalEncoder : IFixedTickable
     private Vector3 attachedAxis;
 
     private float accumulatedAngle;
+    private int accumulatedCounts;
 
     public float AnglePerPulse { get => 2 * Mathf.PI / Specification.PPR; }
     public EncoderSpecification Specification { get; private set; }
@@ -18,6 +19,7 @@ public class IncrementalEncoder : IFixedTickable
     {
         Specification = specification;
         this.accumulatedAngle = 0.0f;    
+        this.accumulatedCounts = 0;
     }
 
     public void SetAttachedBody(IRotate body, Vector3 axis)
@@ -36,9 +38,10 @@ public class IncrementalEncoder : IFixedTickable
         float angularSpeed = Vector3.Dot(attachedBody.GetAngularVelocity(), attachedAxis);
         float deltaAngle = angularSpeed * Time.deltaTime;
         accumulatedAngle += deltaAngle;
+        accumulatedCounts += AngleToCounts(accumulatedAngle, out accumulatedAngle);
         
-        int counts = AngleToCounts(accumulatedAngle, out accumulatedAngle);
-        EncoderMeasurement measurement = new EncoderMeasurement(counts);
+        
+        EncoderMeasurement measurement = new EncoderMeasurement(accumulatedCounts);
         OnNewCounts(measurement);
     }
 
@@ -67,5 +70,6 @@ public class IncrementalEncoder : IFixedTickable
     {
         var handler = NewMeasurement;
         handler?.Invoke(this, measurement);
+        accumulatedCounts = 0;
     }
 }

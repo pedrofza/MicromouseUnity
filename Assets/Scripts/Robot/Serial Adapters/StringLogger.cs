@@ -1,41 +1,32 @@
-﻿// using System.Collections;
-// using System.Collections.Generic;
-// using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-// public class StringLogger : SimpleSerialAdapter
-// {
-//     public StringLogger(byte id) : base(id)
-//     {
-//     }
-    
-//     public override bool ReceiveMessage(byte[] message, out int bytesRead)
-//     {
-//         string stringMessage = "";
-//         int strEndIndex = -1;
-//         for (int i = 0; i < message.Length; ++i)
-//         {
-//             char c = (char)message[i];
-//             if (c == '\0')
-//             {
-//                 strEndIndex = i;
-//                 break;
-//             }
-//         }
+public class StringLogger : SimpleSerialAdapter
+{    
+    private string currentMessage = "";
 
-//         if(strEndIndex == -1)
-//         {
-//             bytesRead = 0;
-//             return false;
-//         }
+    public override bool ReceiveMessage(byte[] message, out int bytesRead)
+    {
+        for (int i = 0; i < message.Length; ++i)
+        {
+            char c = (char)message[i];
+            currentMessage += c;
+            if (c == '\0')
+            {
+                OnMessageCompleted();
+                bytesRead = i + 1;
+                return true;
+            }
+        }
 
-//         bytesRead = strEndIndex;
+        bytesRead = message.Length;
+        return false;
+    }
 
-//         for(int i = 0; i < strEndIndex; ++i)
-//         {
-//             stringMessage += message[i];
-//         }
-
-//         Debug.Log(stringMessage);
-//         return true;
-//     }
-// }
+    private void OnMessageCompleted()
+    {
+        Debug.Log(currentMessage);
+        currentMessage = "";
+    }
+}

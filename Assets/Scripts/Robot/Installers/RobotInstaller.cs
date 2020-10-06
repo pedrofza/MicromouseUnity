@@ -5,7 +5,11 @@ public class RobotInstaller : MonoInstaller
 {
     private void InitExecutionOrder()
     {
-        // Container.BindExecutionOrder<SerialInputBuffer>(-100); // Now only uses separate thread
+        /* 
+        * The following line is needed only when SerialInputBuffer is updated in a loop. 
+        * In the current implementation, it runs as asynchronously
+        // Container.BindExecutionOrder<SerialInputBuffer>(-100);
+        */
         Container.BindExecutionOrder<SerialOutputBuffer>(100);
     }
 

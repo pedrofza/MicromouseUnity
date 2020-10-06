@@ -16,7 +16,6 @@ public class DCMotor : IFixedTickable
     
     // Specification
     private DCMotorSpecification specs;
-
     public DCMotorSpecification Specification { get; private set; }
 
     // Internal state

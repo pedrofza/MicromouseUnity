@@ -14,12 +14,16 @@ public class Maze
 
     GameObject theMaze;
     private PhysicMaterial mazeMaterial;
-
-    public Maze(TextAsset mazeDescription, MazePhysicalSpecification specs, PhysicMaterial mazeMaterial)
+    private GameObject mazeWallPrefab;
+    private GameObject mazeFloorPrefab;
+    
+    public Maze(TextAsset mazeDescription, MazePhysicalSpecification specs, PhysicMaterial mazeMaterial, GameObject mazeWallPrefab, GameObject mazeFloorPrefab)
     {
         this.mazeDescription = mazeDescription;
         this.specs = specs;
         this.mazeMaterial = mazeMaterial;
+        this.mazeWallPrefab = mazeWallPrefab;
+        this.mazeFloorPrefab = mazeFloorPrefab;
     }
     
     public Vector3 StartingPosition()
@@ -95,7 +99,7 @@ public class Maze
 
         this.goalTriggers = goals.ToArray();
         this.theMaze = maze;
-        GameObject floor = InstantiateWallPrimitive();
+        GameObject floor = UnityEngine.Object.Instantiate(mazeFloorPrefab);
         floor.name = "Floor";
         int xl = (lines[0].Length - 1)/4;
         int yl = (lines.Length - 1)/2;
@@ -116,15 +120,17 @@ public class Maze
     {
         GameObject.Destroy(theMaze);
     }
-
+    
     private GameObject InstantiateWallPrimitive()
     {
-        GameObject wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        BoxCollider collider = wall.AddComponent<BoxCollider>();
-        collider.material = mazeMaterial;
-        Rigidbody rb = wall.AddComponent<Rigidbody>();
-        rb.useGravity = false;
-        rb.isKinematic = true;
+        // GameObject wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        // BoxCollider collider = wall.AddComponent<BoxCollider>();
+        // collider.material = mazeMaterial;
+        // Rigidbody rb = wall.AddComponent<Rigidbody>();
+        // rb.useGravity = false;
+        // rb.isKinematic = true;
+        GameObject wall = UnityEngine.Object.Instantiate(mazeWallPrefab);
+        // wall.transform.localScale *= 0.5f;
         return wall;
     }
 

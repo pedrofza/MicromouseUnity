@@ -4,5 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/Fase1Distancia.unity
+    guid: 14619ee184434a649b3d1bdba58d8234
+  - enabled: 0
+    path: Assets/Scenes/Fase2Velocidade.unity
+    guid: feae1decc871aa342b730fdedb31cda5
+  - enabled: 0
+    path: Assets/Scenes/Fase3Circuito.unity
+    guid: a4a10d5b745c6454cb884670dc4a0be1
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: 0886a1d0fa7e3fe41b994cd2068abf8f
   m_configObjects: {}

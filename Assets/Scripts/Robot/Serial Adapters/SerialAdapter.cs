@@ -54,7 +54,6 @@ public abstract class SimpleSerialAdapter : MonoBehaviour, IReceiveSerialMessage
         SerialBus = bus;
     }
 
-
     public virtual bool ReceiveMessage(byte[] message, out int bytesRead)
     {
         bytesRead = 0;

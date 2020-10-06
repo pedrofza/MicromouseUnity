@@ -15,5 +15,5 @@ MonoBehaviour:
   range: 1
   blindSpot: 0
   coefficientOfVariance: 0.05
-  fieldOfView: 0.3
+  fieldOfView: 0
   updateTime: 0.03

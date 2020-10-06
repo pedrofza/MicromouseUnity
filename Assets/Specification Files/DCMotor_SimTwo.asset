@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84c0bf346fcd6e348b04087cf64f0cdf, type: 3}
   m_Name: DCMotor_SimTwo
   m_EditorClassIdentifier: 
-  ratedVoltage: 0
-  gearRatio: 0
-  torqueConstant: 0.0003558
+  ratedVoltage: 9
+  gearRatio: 48
+  torqueConstant: 0.4908
   resistance: 7.6
   inductance: 0.00488
