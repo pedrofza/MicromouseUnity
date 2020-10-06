@@ -1691,7 +1691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b881b6b6cbf61d746b14d2e31057ca43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specs: {fileID: 11400000, guid: cb1756b8dc071b74bad2ec8c0abef054, type: 2}
+  specs: {fileID: 11400000, guid: 9bf68677d9a7a974da5354fb1b78ac0e, type: 2}
   voltageSource: {fileID: 281488215}
   body: {fileID: 1491509325}
   axis: {x: 0, y: -1, z: 0}
