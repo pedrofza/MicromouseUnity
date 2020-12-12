@@ -10,14 +10,14 @@ void setup() {
 float goalWallDistance = 0.5f;
 float goalMeasurement = (goalWallDistance - sr.WHEEL_TO_WHEEL / 2) * sqrt(2);
 
-float k = 300.0f;
-int baseVoltage = 900;
+float k = 50.0f;
+int baseVoltage = 300;
 
 void loop()
 {
   sr.update();
-  float rightDistance = sr.rightDistance();
-  float error = goalMeasurement - rightDistance;
-  sr.leftMotor(baseVoltage - k * error);
-  sr.rightMotor(baseVoltage);
+  float leftDistance = sr.leftDistance();
+  float error = goalMeasurement - leftDistance;
+  sr.leftMotor(baseVoltage + k * error);
+  sr.rightMotor(baseVoltage - k * error);
 }
