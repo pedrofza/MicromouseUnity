@@ -1,4 +1,4 @@
-# MicromouseUnity
+# UnimouseSim
 A 3D simulator for the micromouse competiton developed in the Unity platform. Unity version 2020.1.0f1
 
 # External Dependencies
