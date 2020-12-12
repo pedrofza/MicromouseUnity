@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TimeOfFlight
   m_EditorClassIdentifier: 
   range: 1
-  blindSpot: 0.05
+  blindSpot: 0.03
   coefficientOfVariance: 0.05
   fieldOfView: 0
   updateTime: 0.03

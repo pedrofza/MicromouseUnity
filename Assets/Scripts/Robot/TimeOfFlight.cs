@@ -43,7 +43,7 @@ public class TimeOfFlight : IFixedTickable
 
     private void PerformMeasurement()
     {
-        DistanceMeasurement measurement = MeasureDistance();
+        DistanceMeasurement measurement = MeasureDistanceSimple();
         OnNewDistanceMeasurement(measurement);
     }
 
@@ -65,6 +65,40 @@ public class TimeOfFlight : IFixedTickable
             Physics.DefaultRaycastLayers,
             QueryTriggerInteraction.Ignore
         );
+    }
+
+    protected virtual DistanceMeasurement MeasureDistanceSimple()
+    {
+        Vector3 rayDirection = Heading;
+        float raycastLength = Mathf.Infinity;
+
+        RaycastHit hitInfo;
+        bool didHit = SensorRaycast(Position, rayDirection, out hitInfo, raycastLength);
+
+        float actualDistance = hitInfo.collider ? hitInfo.distance : raycastLength;
+        float measuredDistance = Mathf.Clamp(actualDistance, 0, actualDistance);
+        if(didHit)
+        {
+            measuredDistance = (float)zgs.NextSample(measuredDistance, Specification.CoVar * measuredDistance);
+        }
+
+        measuredDistance = Mathf.Clamp(measuredDistance, 0, Specification.Range);
+
+        MeasurementStatus status = 
+            measuredDistance < Specification.Range ? 
+            MeasurementStatus.success : 
+            MeasurementStatus.timeout
+        ;
+
+        DistanceMeasurement measurement = new DistanceMeasurement(
+            Position,
+            Rotation,
+            Quaternion.identity,
+            measuredDistance,
+            status, 
+            hitInfo.point
+        );
+        return measurement;
     }
 
     protected virtual DistanceMeasurement MeasureDistance()
@@ -99,7 +133,6 @@ public class TimeOfFlight : IFixedTickable
             status, 
             hitInfo.point
         );
-
         return measurement;
     }
 

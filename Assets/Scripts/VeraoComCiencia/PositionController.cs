@@ -20,9 +20,11 @@ public class PositionController : MonoBehaviour
     private float timeWithinArea;
     private float currentPosition;
 
+    private bool Completed { get; set; }
     private void Awake()
     {
         timeWithinArea = 0.0f;
+        Completed = false;
     }
     
     private void FixedUpdate()
@@ -36,16 +38,17 @@ public class PositionController : MonoBehaviour
             timeWithinArea = 0.0f;
         }
 
-        if (CheckWinCondition())
+        if (!Completed && CheckWinCondition())
         {
             completedEvent.Invoke();
-            Destroy(this);
+            Completed = true;
+            // Destroy(this);
         }
     }
 
     private void Update()
     {
-        currentDistanceText.text = $"Distância: {currentPosition:F3} m";
+        currentDistanceText.text = $"Distance: {currentPosition:F3} m".Replace(',', '.');
         if (timeWithinArea == 0)
         {
             currentDistanceText.color = Color.red;

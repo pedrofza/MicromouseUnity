@@ -28,14 +28,18 @@ public class VelocityController : MonoBehaviour
     private float linQty = 0.0f;
     private float angQty = 0.0f;
 
+
+    private bool Completed { get; set; }
+
     private void Awake()
     {
+        Completed = false;
     }
 
     private void Update()
     {
-        tfLinear.text = $"Linear {currentLinearSpeed:F3} m/s";
-        tfAngular.text = $"Angular {currentAngularSpeed:F3} rad/s";
+        tfLinear.text = $"Linear {currentLinearSpeed:F3} m/s".Replace(',', '.');
+        tfAngular.text = $"Angular {currentAngularSpeed:F3} rad/s".Replace(',', '.');
         if (linOk)
         {
             tfLinear.color = Color.green;
@@ -92,10 +96,10 @@ public class VelocityController : MonoBehaviour
             ResetTime();
         }
 
-        if (CheckWinCondition())
+        if (!Completed && CheckWinCondition())
         {
             completedEvent.Invoke();
-            Destroy(this);
+            Completed = true;
         }
     
     }

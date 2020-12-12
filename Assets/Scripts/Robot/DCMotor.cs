@@ -53,6 +53,7 @@ public class DCMotor : IFixedTickable
         float L = Specification.L;
         float Kt = Specification.Kt;
         float R = Specification.R;
+        float B = Specification.B;
 
         float angularSpeed = Vector3.Dot(attachedRigidbody.LocalAngularVelocity(), attachedAxis);
         float backEmf = Kt * angularSpeed;
@@ -62,8 +63,8 @@ public class DCMotor : IFixedTickable
         this.current = drawnCurrent;
 
         // 2. apply torque
-        float torque = Kt * current;
-        attachedRigidbody.AddRelativeTorque(torque * attachedAxis);
+        float developedTorque = Kt * current - B * angularSpeed;
+        attachedRigidbody.AddRelativeTorque(developedTorque * attachedAxis);
     }
 
     public MotorShaft GetShaft()

@@ -8,11 +8,6 @@ public class ManagerSerialAdapter : SimpleSerialAdapter
     private const byte enableMessage = 0x02;
     private const byte disableMessage = 0x03;
 
-    // private void Awake()
-    // {
-    //     sob.EnableSend();
-    // }
-
     public override bool ReceiveMessage(byte[] message, out int bytesRead)
     {
         if (message.Length < 1)

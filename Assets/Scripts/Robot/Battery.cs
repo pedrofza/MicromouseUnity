@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class Battery : IVoltageSource
 {
     private float voltage;

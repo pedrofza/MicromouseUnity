@@ -13,10 +13,12 @@ public class DCMotorSpecification : ScriptableObject
     [SerializeField] private float torqueConstant;
     [SerializeField] private float resistance;
     [SerializeField] private float inductance;
+    [SerializeField] private float dampingFactor;
 
     public float RatedVoltage { get => ratedVoltage; }
     public float GearRatio { get => gearRatio; }
     public float Kt { get => torqueConstant; }
     public float R { get => resistance; }
     public float L { get => inductance; }
+    public float B { get => dampingFactor; }
 }

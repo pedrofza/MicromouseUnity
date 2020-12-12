@@ -42,7 +42,7 @@ public class CircuitManager : MonoBehaviour
             if (lapTime <= previousBest)
             {
                 previousBest = lapTime;
-                tfBest.text = "Melhor " + TimeSpan.FromSeconds(previousBest).ToString(@"mm\:ss\:fff");
+                tfBest.text = "Best " + TimeSpan.FromSeconds(previousBest).ToString(@"mm\:ss\:fff");
             }
         }
         currentLap++;
@@ -54,8 +54,8 @@ public class CircuitManager : MonoBehaviour
 
     private void Update()
     {
-        tfLap.text = $"Volta #{currentLap}";
-        tfTime.text = "Tempo " + TimeSpan.FromSeconds(stopwatch.Time).ToString(@"mm\:ss\:fff");
+        tfLap.text = $"Lap #{currentLap}";
+        tfTime.text = TimeSpan.FromSeconds(stopwatch.Time).ToString(@"mm\:ss\:fff");
     }
 
     private void FixedUpdate()

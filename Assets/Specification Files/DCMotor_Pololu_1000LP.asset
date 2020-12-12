@@ -17,3 +17,4 @@ MonoBehaviour:
   torqueConstant: 1.5144416
   resistance: 18.181818
   inductance: 0.001
+  dampingFactor: 0

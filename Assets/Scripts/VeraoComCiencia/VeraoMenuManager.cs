@@ -11,7 +11,7 @@ public class VeraoMenuManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            escMenu.SetActive(true);
+            ToggleResumePause();
         }
     }
 
@@ -35,9 +35,19 @@ public class VeraoMenuManager : MonoBehaviour
         LoadLevel(2);
     }
 
+    public void LoadMicromouseLevel()
+    {
+        LoadLevel(3);
+    }
+
     public void Resume()
     {
         escMenu.SetActive(false);
+    }
+
+    public void ToggleResumePause()
+    {
+        escMenu.SetActive(!escMenu.activeSelf);
     }
 
     public void Quit()

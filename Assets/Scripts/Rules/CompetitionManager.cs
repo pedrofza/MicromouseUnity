@@ -34,6 +34,7 @@ public class CompetitionManager : MonoBehaviour
         if (!PopulateMazeSelection.selectedAsset)
         {
             Debug.Log("Asset was null");
+            robotPrefab.transform.position = new Vector3(0, -100, 0);
             return;
         }
         maze = new Maze(PopulateMazeSelection.selectedAsset, mazeSpecs, mazeMaterial, mazeWallPrefab, mazeFloorPrefab);
