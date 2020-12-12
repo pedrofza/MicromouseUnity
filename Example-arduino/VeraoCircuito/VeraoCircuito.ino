@@ -7,7 +7,7 @@ void setup() {
   sr.initialize();
 }
 
-float goalWallDistance = 0.45f;
+float goalWallDistance = 0.5f;
 float goalMeasurement = (goalWallDistance - sr.WHEEL_TO_WHEEL / 2) * sqrt(2);
 
 float k = 300.0f;
