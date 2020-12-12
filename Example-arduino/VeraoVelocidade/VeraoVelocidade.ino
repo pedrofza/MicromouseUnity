@@ -7,8 +7,8 @@ constexpr float goalAngularSpeed = 1.57;
 constexpr float linearGain = 10.0f;
 constexpr float angularGain = 1.0f;
 
-float angularOffset = 0.0;
-float baseVoltage = 0.0;
+float angularOffset = 0.0f;
+float baseVoltage = 0.0f;
 
 SimRobot sr;
 
